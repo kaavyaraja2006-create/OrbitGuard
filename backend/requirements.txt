@@ -1,0 +1,9 @@
+fastapi==0.162.0
+uvicorn[standard]==0.54.0
+pydantic>=2.9,<3
+sqlalchemy==2.1.6
+httpx==0.28.1
+psycopg[binary]>=3.2,<4
+numpy>=1.26
+sgp4==2.27
+pytest>=8

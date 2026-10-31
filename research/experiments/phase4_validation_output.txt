@@ -1,0 +1,18 @@
+== Pc integral vs analytic (zero miss, isotropic) ==
+R=0.02 km sigma=0.1 km  exact=1.980132669324e-02  quadrature=1.980132669324e-02  rel.err=3.0e-15
+R=0.01 km sigma=0.5 km  exact=1.999800013333e-04  quadrature=1.999800013333e-04  rel.err=5.7e-14
+R=0.05 km sigma=0.05 km  exact=3.934693402874e-01  quadrature=3.934693402874e-01  rel.err=1.3e-15
+
+== Pc integral vs Monte Carlo (offset, correlated covariance) ==
+miss=[0.05, 0.02] R=0.03: quadrature=9.073678e-02  MC=9.077150e-02 +/- 1.4e-04  |diff|/SE=0.24
+miss=[0.5, -0.2] R=0.02: quadrature=2.759276e-04  MC=2.725000e-04 +/- 8.3e-06  |diff|/SE=0.42
+
+== Worst-case Pc over isotropic covariance vs small-body limit R^2/(e d^2) ==
+d=1.0 km R=0.01 km: Pc_max=3.678794e-05 at sigma=0.7071 km;  limit=3.678794e-05, d/sqrt2=0.7071
+d=0.2 km R=0.02 km: Pc_max=3.678810e-03 at sigma=0.1411 km;  limit=3.678794e-03, d/sqrt2=0.1414
+d=5.0 km R=0.02 km: Pc_max=5.886071e-06 at sigma=3.5355 km;  limit=5.886071e-06, d/sqrt2=3.5355
+
+== Screening benchmark (SYNTHETIC catalog of random LEO objects) ==
+N=  1000: after shell filter   161, pair-intervals     231,840, refinements   0, events   0, runtime 0.22 s
+N=  5000: after shell filter   709, pair-intervals   1,020,960, refinements   2, events   1, runtime 0.71 s
+N= 10000: after shell filter  1515, pair-intervals   2,181,600, refinements   3, events   1, runtime 1.83 s

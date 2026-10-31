@@ -1,0 +1,43 @@
+services:
+  db:
+    image: postgis/postgis:16-3.4
+    environment:
+      POSTGRES_DB: orbitguard
+      POSTGRES_USER: orbitguard
+      POSTGRES_PASSWORD: orbitguard # local development only
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U orbitguard"]
+      interval: 5s
+      retries: 10
+
+  backend:
+    build:
+      context: .
+      dockerfile: infrastructure/docker/backend.Dockerfile
+    environment:
+      ORBITGUARD_DATABASE_URL: postgresql+psycopg://orbitguard:orbitguard@db:5432/orbitguard
+      ORBITGUARD_CORS_ORIGINS: http://localhost:8080
+      ORBITGUARD_PUBLIC_URL: http://localhost:8080   # base of e-mailed links
+      ORBITGUARD_TRUST_PROXY: "1"                     # nginx sets X-Forwarded-For
+      ORBITGUARD_DATA_DIR: /srv/data/raw
+    volumes:
+      - ./data:/srv/data:ro
+    depends_on:
+      db:
+        condition: service_healthy
+    ports:
+      - "8000:8000"
+
+  frontend:
+    build:
+      context: .
+      dockerfile: infrastructure/docker/frontend.Dockerfile
+    depends_on:
+      - backend
+    ports:
+      - "8080:80"
+
+volumes:
+  pgdata:

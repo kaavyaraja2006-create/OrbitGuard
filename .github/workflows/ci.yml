@@ -1,0 +1,41 @@
+name: CI
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  science-and-backend:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Install engine and backend
+        run: |
+          pip install ./scientific-engine
+          pip install -r backend/requirements.txt
+      - name: Scientific engine tests (incl. Vallado SGP4 verification)
+        working-directory: scientific-engine
+        run: pytest -q
+      - name: Backend integration tests
+        working-directory: backend
+        run: pytest -q
+      - name: Worked calculation example
+        working-directory: scientific-engine
+        run: python examples/worked_example.py
+
+  frontend:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: frontend
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+      - run: npm install
+      - run: npm run typecheck
+      - run: npm run build

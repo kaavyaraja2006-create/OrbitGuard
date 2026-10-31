@@ -1,0 +1,23 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "orbitguard-engine"
+version = "0.1.0"
+description = "ORBITGUARD scientific engine: orbital elements, classification, SGP4 propagation, frames"
+requires-python = ">=3.11"
+dependencies = [
+  "numpy>=1.26",
+  "sgp4==2.27",
+  "scipy>=1.11",
+]
+
+[project.optional-dependencies]
+test = ["pytest>=8"]
+
+[tool.setuptools.packages.find]
+include = ["orbitguard_engine*"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
