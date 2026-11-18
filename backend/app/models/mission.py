@@ -148,7 +148,7 @@ class SystemAlert(Base):
     organization_id: Mapped[int | None] = mapped_column(ForeignKey("organizations.id"), nullable=True, index=True)  # None = everyone
     permission: Mapped[str | None] = mapped_column(String(64), nullable=True)  # who may see it
     severity: Mapped[str] = mapped_column(String(16))  # info | warning | critical
-    kind: Mapped[str] = mapped_column(String(32))
+    kind: Mapped[str] = mapped_column(String(64))
     title: Mapped[str] = mapped_column(String(200))
     message: Mapped[str] = mapped_column(Text)
     link: Mapped[str | None] = mapped_column(String(200), nullable=True)

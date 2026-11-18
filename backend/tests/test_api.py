@@ -11,7 +11,7 @@ import os
 import tempfile
 
 _DB = tempfile.NamedTemporaryFile(suffix=".db", delete=False)
-os.environ["ORBITGUARD_DATABASE_URL"] = f"sqlite:///{_DB.name}"
+os.environ.setdefault("ORBITGUARD_DATABASE_URL", f"sqlite:///{_DB.name}")
 
 import httpx  # noqa: E402
 import pytest  # noqa: E402

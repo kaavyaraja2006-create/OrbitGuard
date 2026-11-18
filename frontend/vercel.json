@@ -1,0 +1,6 @@
+{
+  "rewrites": [
+    { "source": "/api/:path*", "destination": "https://orbitguard-api.onrender.com/api/:path*" },
+    { "source": "/((?!cesium/|assets/).*)", "destination": "/index.html" }
+  ]
+}

@@ -99,7 +99,7 @@ class AuditLog(Base):
     __tablename__ = "audit_logs"
     id: Mapped[int] = mapped_column(primary_key=True)
     at: Mapped[datetime] = mapped_column(DateTime(timezone=True), default=utcnow, index=True)
-    kind: Mapped[str] = mapped_column(String(32))
+    kind: Mapped[str] = mapped_column(String(64))
     message: Mapped[str] = mapped_column(Text)
     details: Mapped[dict | None] = mapped_column(JSON, nullable=True)
 

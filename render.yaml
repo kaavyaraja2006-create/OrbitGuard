@@ -1,0 +1,24 @@
+# Render Blueprint: New → Blueprint → pick this repo.
+# Creates the ORBITGUARD API as a Docker web service. Render asks for the values marked sync: false.
+services:
+  - type: web
+    name: orbitguard-api
+    runtime: docker
+    plan: free
+    dockerfilePath: ./infrastructure/docker/backend.Dockerfile
+    dockerContext: .
+    healthCheckPath: /api/v1/health
+    autoDeploy: true
+    envVars:
+      - key: ORBITGUARD_DATABASE_URL # Neon string, starting postgresql+psycopg:// and ending ?sslmode=require
+        sync: false
+      - key: ORBITGUARD_CORS_ORIGINS # your Vercel address, e.g. https://orbit-guard.vercel.app
+        sync: false
+      - key: ORBITGUARD_PUBLIC_URL # the same Vercel address
+        sync: false
+      - key: ORBITGUARD_COOKIE_SECURE
+        value: "1"
+      - key: ORBITGUARD_TRUST_PROXY
+        value: "1"
+      - key: ORBITGUARD_REQUIRE_EMAIL_VERIFICATION
+        value: "0"

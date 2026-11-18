@@ -14,4 +14,5 @@ COPY backend /srv/backend
 WORKDIR /srv/backend
 
 EXPOSE 8000
-CMD ["uvicorn", "app.main:app", "--host", "0.0.0.0", "--port", "8000"]
+# Cloud hosts (Render, Railway, Fly) pass the port in $PORT; default 8000 locally
+CMD ["sh", "-c", "uvicorn app.main:app --host 0.0.0.0 --port ${PORT:-8000} --proxy-headers --forwarded-allow-ips=*"]
