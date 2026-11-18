@@ -5,6 +5,7 @@ services:
     name: orbitguard-api
     runtime: docker
     plan: free
+    region: singapore
     dockerfilePath: ./infrastructure/docker/backend.Dockerfile
     dockerContext: .
     healthCheckPath: /api/v1/health
